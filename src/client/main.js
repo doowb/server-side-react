@@ -9,15 +9,23 @@ var data = {
 
 function onSignonSubmit (user) {
   data.username = user.username;
+  if (!users[data.username]) {
+    users[data.username] = 1;
+  }
   renderAll();
 }
 
 function onSignoutSubmit (user) {
+  var username = data.username;
+  if (users[data.username]) {
+    delete users[data.username];
+  }
   data.username = null;
   renderAll();
 }
 
 var comments = [];
+var users = {};
 
 function renderAll () {
   renderAuthentication();
@@ -26,7 +34,6 @@ function renderAll () {
 }
 
 function renderChat () {
-  console.log('renderChat', data.username);
   React.render(
     <Chat comments={comments} username={data.username} pollInterval={10000} />,
     document.getElementById('chat')
@@ -42,7 +49,7 @@ function renderAuthentication () {
 
 function renderUserList () {
   React.render(
-    <UserList />,
+    <UserList users={users} />,
     document.getElementById('userlist')
   );
 }

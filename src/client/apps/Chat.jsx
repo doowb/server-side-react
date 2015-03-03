@@ -27,9 +27,8 @@ var CommentForm = React.createClass({
   },
   handleSubmit: function (e) {
     e.preventDefault();
-    var username = this.state.username || this.props.username;
+    var username = this.props.username;
     var text = this.refs.text.getDOMNode().value.trim();
-    console.log(username, text);
     if (!text || !username) {
       return;
     }
@@ -74,11 +73,11 @@ var Chat = React.createClass({
   loadCommentsFromServer: function () {
     // TODO: get from server
     var comments = this.state.comments;
-    var username = this.state.username || this.props.username;
+    var username = this.props.username;
     this.setState({comments: comments, username: username});
   },
   handleCommentSubmit: function (comment) {
-    var username = this.state.username || this.props.username;
+    var username = this.props.username;
     var comments = this.state.comments;
     var newComments = comments.concat([comment]);
     this.setState({username: username, comments: newComments});
@@ -94,7 +93,7 @@ var Chat = React.createClass({
     setInterval(this.loadCommentsFromServer, this.props.pollInterval);
   },
   render: function () {
-    var username = this.state.username || this.props.username;
+    var username = this.props.username;
     return (
       <div>
         <CommentList comments={this.state.comments} />
