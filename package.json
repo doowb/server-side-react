@@ -30,7 +30,11 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "mocha": "*"
+    "assemble": "git://github.com/assemble/assemble#v0.6.0",
+    "browserify": "^9.0.3",
+    "engine-react": "^0.2.1",
+    "mocha": "*",
+    "reactify": "^1.0.0"
   },
   "keywords": []
 }
