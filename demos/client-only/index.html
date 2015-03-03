@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <title>Demo - Client</title>
     <script src="http://fb.me/react-0.12.2.js"></script>
     <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
@@ -22,7 +23,7 @@
 
         function getMessage (cb) {
           setTimeout(function () {
-            cb("Hello World!!!");
+            cb("Hello Remote World!!!");
           }, 2000);
         }
 
@@ -34,7 +35,7 @@
           },
           getInitialState: function () {
             return {
-              message: this.props.message || 'Hello'
+              message: this.props.message || 'Hello Client World'
             }
           },
           componentDidMount: function () {
