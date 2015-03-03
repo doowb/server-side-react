@@ -18,7 +18,9 @@
     "type": "MIT",
     "url": "https://github.com/doowb/server-side-react/blob/master/LICENSE"
   },
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "main": "index.js",
   "engines": {
     "node": ">=0.10.0"
@@ -28,8 +30,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "mocha": "*",
-    "should": "*"
+    "mocha": "*"
   },
   "keywords": []
 }
