@@ -72,15 +72,35 @@ var CommentList = React.createClass({
 var Chat = React.createClass({
   loadCommentsFromServer: function () {
     // TODO: get from server
-    var comments = this.state.comments;
-    var username = this.props.username;
-    this.setState({comments: comments, username: username});
+    $.ajax({
+      url: '/api/comments',
+      dataType: 'json',
+      success: function(data) {
+        this.setState({comments: data.comments});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('/api/comments', status, err.toString());
+      }.bind(this)
+    });
   },
   handleCommentSubmit: function (comment) {
     var username = this.props.username;
     var comments = this.state.comments;
     var newComments = comments.concat([comment]);
     this.setState({username: username, comments: newComments});
+    $.ajax({
+      url: '/api/comments',
+      dataType: 'json',
+      contentType: 'application/json',
+      type: 'POST',
+      data: JSON.stringify(comment),
+      success: function (data) {
+        this.setState({comments: data.comments});
+      }.bind(this),
+      error: function (xhr, stauts, err) {
+        console.error('/api/comments', status.err.toString());
+      }.bind(this)
+    });
   },
   getInitialState: function () {
     return {

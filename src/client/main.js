@@ -12,6 +12,20 @@ function onSignonSubmit (user) {
   if (!users[data.username]) {
     users[data.username] = 1;
   }
+  console.log('data.username', data.username);
+  $.ajax({
+    url: '/api/users',
+    dataType: 'json',
+    contentType: 'application/json',
+    type: 'POST',
+    data: JSON.stringify({ username: data.username }),
+    success: function(data) {
+      console.log('user online');
+    }.bind(this),
+    error: function(xhr, status, err) {
+      console.error('/api/users', status, err.toString());
+    }.bind(this)
+  });
   renderAll();
 }
 
@@ -21,6 +35,17 @@ function onSignoutSubmit (user) {
     delete users[data.username];
   }
   data.username = null;
+  $.ajax({
+    url: '/api/users/' + username,
+    dataType: 'json',
+    type: 'DELETE',
+    success: function(data) {
+      console.log('user offline');
+    }.bind(this),
+    error: function(xhr, status, err) {
+      console.error('/api/users', status, err.toString());
+    }.bind(this)
+  });
   renderAll();
 }
 
@@ -35,7 +60,7 @@ function renderAll () {
 
 function renderChat () {
   React.render(
-    <Chat comments={comments} username={data.username} pollInterval={10000} />,
+    <Chat comments={comments} username={data.username} pollInterval={2000} />,
     document.getElementById('chat')
   );
 }
@@ -49,7 +74,7 @@ function renderAuthentication () {
 
 function renderUserList () {
   React.render(
-    <UserList users={users} />,
+    <UserList users={users} pollInterval={2000} />,
     document.getElementById('userlist')
   );
 }
