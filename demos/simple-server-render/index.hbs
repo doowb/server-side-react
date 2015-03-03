@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="http://fb.me/react-0.12.2.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+
+  <body>
+
+    <div id="app">{{{content}}}</div>
+
+    <script type="text/jsx">
+      $(function () {
+
+        function getMessage (cb) {
+          setTimeout(function () {
+            cb("Hello Remote World!!!");
+          }, 2000);
+        }
+
+        {{{appjs}}}
+
+        // wait a second to render the client-side element
+        setTimeout(function () {
+          React.render(
+            <HelloWorld loadMessage={getMessage} />,
+            document.getElementById('app')
+          );
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

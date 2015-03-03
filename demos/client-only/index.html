@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script src="http://fb.me/react-0.12.2.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.12.2.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  </head>
+
+  <body>
+
+    <div id="app"></div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script type="text/jsx">
+      $(function () {
+
+        function getMessage (cb) {
+          setTimeout(function () {
+            cb("Hello World!!!");
+          }, 2000);
+        }
+
+        var HelloWorld = React.createClass({
+          loadRemoteMessage: function () {
+            this.props.loadMessage(function (message) {
+              this.setState({message: message});
+            }.bind(this));
+          },
+          getInitialState: function () {
+            return {
+              message: this.props.message || 'Hello'
+            }
+          },
+          componentDidMount: function () {
+            this.loadRemoteMessage();
+          },
+          render: function () {
+            return (
+              <span>{this.state.message}</span>
+            );
+          }
+        });
+
+        React.render(
+          <HelloWorld loadMessage={getMessage} />,
+          document.getElementById('app')
+        );
+      });
+    </script>
+  </body>
+</html>
