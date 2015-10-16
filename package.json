@@ -50,5 +50,12 @@
     "reactify": "^1.0.0",
     "serve-static": "^1.9.1"
   },
-  "keywords": []
+  "keywords": [],
+  "contributors": [
+    {
+      "name": "Brian Woodward",
+      "email": "brian.woodward@gmail.com",
+      "url": "https://github.com/doowb"
+    }
+  ]
 }
